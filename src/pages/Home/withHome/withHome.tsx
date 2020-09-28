@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import { IWithHome, IProduct } from "../types";
-import productsJSON from "./products.json";
+import { IWithHome, IProduct } from '../types';
+import productsJSON from './products.json';
 
 const withHome = (WrappedComponent: React.ElementType) => {
   const WithHomeHOC = (props: IWithHome) => {
@@ -12,12 +12,13 @@ const withHome = (WrappedComponent: React.ElementType) => {
     useEffect(() => {
       function fetchProducts() {
         const productsData: IProduct[] = productsJSON
-          .map(p => ({
+          .map((p, index) => ({
+            id: `${index}`,
             brand: p.brand[0],
             img_url: p.images[0][0],
             friendly_name: p.friendly_name[0],
             price: parseFloat(p.sale_price[0]),
-            discount: 0
+            discount: 0,
           }))
           .slice(0, limit);
         setProducts(productsData);
@@ -30,7 +31,7 @@ const withHome = (WrappedComponent: React.ElementType) => {
       try {
         setLoading(true);
         setTimeout(() => {
-          setLimit(oldLimit => oldLimit + 10);
+          setLimit((oldLimit) => oldLimit + 10);
           setLoading(false);
         }, 2000);
       } catch (err) {}

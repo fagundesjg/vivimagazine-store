@@ -1,4 +1,5 @@
 export interface IProduct {
+  id: string;
   brand: string;
   img_url: string;
   friendly_name: string;

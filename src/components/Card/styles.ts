@@ -14,6 +14,10 @@ const Container = styled.div`
     box-shadow: 10px 10px 34px -16px rgba(204, 204, 204, 1);
   }
   padding: 10px;
+
+  @media (max-width: 576px) {
+    width: 45%;
+  }
 `;
 
 const Brand = styled.span`

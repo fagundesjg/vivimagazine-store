@@ -1,7 +1,7 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
-import { colors } from "./colors";
-import "./fonts/font-faces.css";
+import { colors } from './colors';
+import './fonts/font-faces.css';
 
 export default createGlobalStyle`
     * {
@@ -23,5 +23,22 @@ export default createGlobalStyle`
     }
     button {
         cursor: pointer;
+        text-transform: uppercase;
+  font-weight: 1.2em;
+  color: white;
+  background-color: ${colors.dark};
+  margin-top: 10px;
+  height: 35px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    background-color: #222;
+  }
+
+  svg {
+    margin-left: 10px;
+  }
     }
 `;

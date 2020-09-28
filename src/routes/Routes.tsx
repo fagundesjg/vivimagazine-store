@@ -1,7 +1,7 @@
-import React, { Fragment } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import React, { Fragment } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import { Home } from "../pages";
+import { Home, Details } from '../pages';
 
 const Routes = () => {
   return (
@@ -9,6 +9,7 @@ const Routes = () => {
       <Fragment>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/details/:id" component={Details} />
         </Switch>
       </Fragment>
     </BrowserRouter>
