@@ -18,6 +18,7 @@ const Content = styled.div`
 const PhotosContainer = styled.div`
   display: flex;
   width: 100%;
+  min-width: 300px;
   max-width: 750px;
   flex: 1;
   justify-content: center;
@@ -115,11 +116,8 @@ const Button = styled.button`
   margin-top: 8px;
 
   &:hover {
-    cursor: hover;
+    cursor: pointer;
     filter: brightness(120%);
-  }
-  &:active {
-    margin-top: 5px;
   }
 `;
 
