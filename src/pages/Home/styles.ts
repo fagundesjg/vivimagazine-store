@@ -17,6 +17,9 @@ const ProductsContainer = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  @media (max-width: 576px) {
+    justify-content: space-between;
+  }
 
   & > * {
     margin: 5px;

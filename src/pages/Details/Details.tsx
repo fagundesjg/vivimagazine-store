@@ -57,29 +57,34 @@ const Details = () => {
           />
         </S.PhotosContainer>
         <S.DetailsContainer>
-          <S.Brand>{product?.category.name}</S.Brand>
-          <S.Title>{product?.name}</S.Title>
-          {product && product.discount && product.discount > 0 ? (
-            <>
-              <S.OldPrice>{`de R$ ${product.price
-                .toFixed(2)
-                .replace('.', ',')}`}</S.OldPrice>
-              <S.Row>
-                <S.Price>{`por R$ ${(
-                  product.price *
-                  ((100 - product.discount) / 100)
-                )
+          <S.InfosContainer>
+            <S.Brand>{product?.category.name}</S.Brand>
+            <S.Title>{product?.name}</S.Title>
+            {product && product.discount && product.discount > 0 ? (
+              <>
+                <S.OldPrice>{`de R$ ${product.price
                   .toFixed(2)
-                  .replace('.', ',')}`}</S.Price>
-                <S.Discount>- {product.discount}%</S.Discount>
-              </S.Row>
-            </>
-          ) : (
-            <S.Price style={{ marginTop: 16 }}>{`R$ ${product?.price
-              .toFixed(2)
-              .replace('.', ',')}`}</S.Price>
-          )}
-          {/* <S.Description>{productInfo?.description}</S.Description> */}
+                  .replace('.', ',')}`}</S.OldPrice>
+                <S.Row>
+                  <S.Price>{`por R$ ${(
+                    product.price *
+                    ((100 - product.discount) / 100)
+                  )
+                    .toFixed(2)
+                    .replace('.', ',')}`}</S.Price>
+                  <S.Discount>- {product.discount}%</S.Discount>
+                </S.Row>
+              </>
+            ) : (
+              <S.Price style={{ marginTop: 16 }}>{`R$ ${product?.price
+                .toFixed(2)
+                .replace('.', ',')}`}</S.Price>
+            )}
+          </S.InfosContainer>
+          <S.ButtonsContainer>
+            <S.Button>Adicionar ao carrinho</S.Button>
+            <S.Button>Comprar</S.Button>
+          </S.ButtonsContainer>
         </S.DetailsContainer>
       </S.Content>
     </S.Container>

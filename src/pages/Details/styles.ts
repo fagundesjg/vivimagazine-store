@@ -9,26 +9,29 @@ const Container = styled.div`
 const Content = styled.div`
   margin: 30px 0;
   display: flex;
-  width: 100%;
   max-height: 500px;
   flex-wrap: wrap;
-  padding: 100px 5% 0 5%;
+  padding: 100px 5vw 0 5vw;
+  justify-content: center;
 `;
 
 const PhotosContainer = styled.div`
   display: flex;
-  min-width: 500px;
+  width: 100%;
+  max-width: 750px;
   flex: 1;
-  padding: 0 5%;
   justify-content: center;
-  margin-bottom: 32px;
+  justify-content: space-between;
 `;
 
 const DetailsContainer = styled.div`
   display: flex;
+  min-width: 300px;
+  max-width: 750px;
   flex: 1;
+  padding: 2% 5vw 0 5vw;
   flex-direction: column;
-  min-width: 500px;
+  justify-content: space-between;
 `;
 
 const PhotoPreviewContainer = styled.div`
@@ -95,6 +98,44 @@ const Discount = styled.span`
   font-weight: bold;
 `;
 
+const Button = styled.button`
+  width: 100%;
+  padding: 12px 16px;
+  background-color: #275a53;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+  border-radius: 2px;
+  transform: margin-top 0.4s ease;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-top: 8px;
+
+  &:hover {
+    cursor: hover;
+    filter: brightness(120%);
+  }
+  &:active {
+    margin-top: 5px;
+  }
+`;
+
+const InfosContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const ButtonsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  min-height: 150px;
+  justify-content: flex-end;
+  flex-direction: column;
+`;
+
 export {
   Container,
   Content,
@@ -110,4 +151,7 @@ export {
   Price,
   Discount,
   Row,
+  Button,
+  InfosContainer,
+  ButtonsContainer,
 };
