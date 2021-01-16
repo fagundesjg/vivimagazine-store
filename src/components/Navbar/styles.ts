@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { colors } from "../../styles";
+import styled from 'styled-components';
+import { colors } from 'styles';
 
 const Container = styled.div`
   display: flex;
@@ -29,7 +29,7 @@ const Container = styled.div`
 
 const Logo = styled.h6`
   display: flex;
-  font-family: "Courgette", cursive;
+  font-family: 'Courgette', cursive;
   cursor: pointer;
   user-select: none;
   color: green;
@@ -42,7 +42,7 @@ const MenuContainer = styled.div`
 
   span,
   svg {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     text-transform: uppercase;
     font-size: 0.7em;
     cursor: pointer;

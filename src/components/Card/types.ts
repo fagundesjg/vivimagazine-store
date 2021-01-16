@@ -1,4 +1,4 @@
-import { IProduct } from '../../pages/Home/types';
+import { IProduct } from 'services/products/types';
 
 export interface ICard {
   product: IProduct;

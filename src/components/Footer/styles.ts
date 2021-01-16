@@ -1,5 +1,6 @@
-import styled from "styled-components";
-import { colors } from "../../styles";
+import styled from 'styled-components';
+
+import { colors } from 'styles';
 
 const Container = styled.div`
   display: flex;

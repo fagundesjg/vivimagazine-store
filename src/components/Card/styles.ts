@@ -1,7 +1,9 @@
-import styled from "styled-components";
-import { colors } from "../../styles";
+import styled from 'styled-components';
+
+import { colors } from 'styles';
 
 const Container = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   border: 0.3px solid ${colors.smoke};
@@ -14,6 +16,7 @@ const Container = styled.div`
     box-shadow: 10px 10px 34px -16px rgba(204, 204, 204, 1);
   }
   padding: 10px;
+  justify-content: space-between;
 
   @media (max-width: 576px) {
     width: 45%;
@@ -59,6 +62,7 @@ const Price = styled.span`
 `;
 
 const Buy = styled.button`
+  cursor: pointer;
   text-transform: uppercase;
   font-weight: 1.2em;
   color: white;
@@ -78,4 +82,16 @@ const Buy = styled.button`
   }
 `;
 
-export { Container, Brand, Preview, Name, OldPrice, Price, Buy };
+const Discount = styled.span`
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #275a53;
+  color: white;
+  padding: 8px 10px;
+  font-size: 1em;
+  margin-left: 8px;
+  font-weight: bold;
+`;
+
+export { Container, Brand, Preview, Name, OldPrice, Price, Buy, Discount };

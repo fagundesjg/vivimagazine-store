@@ -1,41 +1,40 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useParams } from 'react-router-dom';
 
-import { IDetails, IProductInfo } from './types';
 import * as S from './styles';
-import { Navbar } from '../../components';
+import { Navbar } from 'components';
+import { IProduct } from 'services/products/types';
+import { ProductServices } from 'services';
 
-const Details = (props: IDetails) => {
-  const { id } = props;
-  const [productInfo, setProductInfo] = useState<IProductInfo>();
+const Details = () => {
+  const { id } = useParams<{ id: string }>();
+  const [product, setProduct] = useState<IProduct>();
   const [selectedPhoto, setSelectedPhoto] = useState<string>();
+  const [photos, setPhotos] = useState<string[]>([]);
+
+  const openImage = (imageUrl: string) => {
+    window.open(imageUrl, '_blank');
+  };
+
+  const fetchProduct = useCallback(async () => {
+    const data = await ProductServices.show(id);
+    setProduct(data);
+    let photosData: string[] = [];
+    Array.from({ length: 3 }).forEach((_, i) => {
+      const key = `image${i + 1}`;
+      console.log(`i = ${i}, value = ${data[key]}`);
+      if (data[key]) {
+        photosData.push(data[key]);
+      }
+    });
+    setPhotos(photosData);
+    setSelectedPhoto(photosData[0]);
+    console.log({ photosData });
+  }, [id]);
 
   useEffect(() => {
-    async function fetchProductInfo() {
-      setTimeout(() => {
-        const newProductInfo: IProductInfo = {
-          brand: 'HOMEM',
-          description:
-            'O frescor da combinação de ervas aromáticas com o gengibre e noz moscada, em equilíbrio com um toque de madeiras quentes, desperta e renova as energias nessa fragrância que te acompanha em todos os momentos do seu dia. Para homens verdadeiros e inteiros, livres de padrões e estereótipos.',
-          discount: 0.1,
-          id: '1',
-          max_parcels: 3,
-          name: 'Natura Homem',
-          photos: [
-            'https://static.natura.com/sites/default/files/styles/product_detail_square/public/products/53255_1_15.jpg?itok=9RfgmVwc',
-            'https://static.natura.com/sites/default/files/styles/product_detail_square/public/products/53255_2.jpg?itok=Jc0E0eCQ',
-            'https://static.natura.com/sites/default/files/styles/product_detail_square/public/products/53255_3.jpg?itok=F0eiLbQz',
-            'https://static.natura.com/sites/default/files/styles/product_detail_square/public/products/53255_4.jpg?itok=a-UG_io8',
-          ],
-          price: 128.9,
-          quant: 1,
-        };
-        setProductInfo(newProductInfo);
-        setSelectedPhoto(newProductInfo.photos[0]);
-      }, []);
-    }
-
-    fetchProductInfo();
-  }, []);
+    fetchProduct();
+  }, [fetchProduct]);
 
   return (
     <S.Container>
@@ -43,22 +42,43 @@ const Details = (props: IDetails) => {
       <S.Content>
         <S.PhotosContainer>
           <S.PhotoPreviewContainer>
-            {productInfo ? (
-              productInfo.photos.map((photo) => (
-                <S.PhotoPreview
-                  onClick={() => setSelectedPhoto(photo)}
-                  src={photo}
-                />
-              ))
-            ) : (
-              <Fragment />
-            )}
+            {photos.map((p, index) => (
+              <S.PhotoPreview
+                key={index}
+                selected={p === selectedPhoto}
+                onClick={() => setSelectedPhoto(p)}
+                src={p}
+              />
+            ))}
           </S.PhotoPreviewContainer>
-          <S.PhotoView src={selectedPhoto} />
+          <S.PhotoView
+            src={selectedPhoto}
+            onClick={() => openImage(selectedPhoto ?? '')}
+          />
         </S.PhotosContainer>
         <S.DetailsContainer>
-          <S.Brand>{productInfo?.brand}</S.Brand>
-          <S.Title>{productInfo?.name}</S.Title>
+          <S.Brand>{product?.category.name}</S.Brand>
+          <S.Title>{product?.name}</S.Title>
+          {product && product.discount && product.discount > 0 ? (
+            <>
+              <S.OldPrice>{`de R$ ${product.price
+                .toFixed(2)
+                .replace('.', ',')}`}</S.OldPrice>
+              <S.Row>
+                <S.Price>{`por R$ ${(
+                  product.price *
+                  ((100 - product.discount) / 100)
+                )
+                  .toFixed(2)
+                  .replace('.', ',')}`}</S.Price>
+                <S.Discount>- {product.discount}%</S.Discount>
+              </S.Row>
+            </>
+          ) : (
+            <S.Price style={{ marginTop: 16 }}>{`R$ ${product?.price
+              .toFixed(2)
+              .replace('.', ',')}`}</S.Price>
+          )}
           {/* <S.Description>{productInfo?.description}</S.Description> */}
         </S.DetailsContainer>
       </S.Content>

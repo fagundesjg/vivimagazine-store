@@ -1,37 +1,51 @@
-import React from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FaSpinner } from 'react-icons/fa';
 
-import { Container, ProductsContainer, SeeMore } from './styles';
-import { withHome } from './withHome';
-import { Navbar, Footer, Card } from '../../components';
-import { IHome, IProduct } from './types';
-
 import './styles.css';
+import { Navbar, Footer, Card } from 'components';
+import { IProduct } from 'services/products/types';
+import * as S from './styles';
+import { ProductServices } from 'services';
 
-const HomeComponent = (props: IHome) => {
-  const { products, loading, fetchMoreProcucts } = props;
+const Home = () => {
   const history = useHistory();
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const fetchProducts = useCallback(async () => {
+    try {
+      setLoading(true);
+      const data = await ProductServices.index();
+      setProducts(data);
+    } catch (err) {
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
 
   return (
-    <Container>
+    <S.Container>
       <Navbar />
-      <ProductsContainer>
-        {products.map((product: IProduct, i: number) => (
+      <S.ProductsContainer>
+        {products.map((product: IProduct, index: number) => (
           <Card
+            key={index}
             product={product}
             onClick={() => history.push(`/details/${product.id}`)}
           />
         ))}
-      </ProductsContainer>
-      <SeeMore onClick={fetchMoreProcucts} disabled={loading}>
+      </S.ProductsContainer>
+      <S.SeeMore onClick={() => {}} disabled={loading}>
         {loading ? <FaSpinner className="spinner" /> : 'Ver mais'}
-      </SeeMore>
+      </S.SeeMore>
       <Footer />
-    </Container>
+    </S.Container>
   );
 };
-
-const Home = withHome(HomeComponent);
 
 export { Home };
