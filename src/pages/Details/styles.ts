@@ -4,12 +4,11 @@ const Container = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-`;
-
-const Content = styled.div`
+  `;
+  
+  const Content = styled.div`
   margin: 30px 0;
   display: flex;
-  max-height: 500px;
   flex-wrap: wrap;
   padding: 100px 5vw 0 5vw;
   justify-content: center;
@@ -68,8 +67,21 @@ const Title = styled.span`
   text-transform: uppercase;
 `;
 
-const Description = styled.p`
-  text-align: justify;
+const Description = styled.div`
+  display: flex;
+  width: 100vw;
+  flex-direction: column;
+  p {
+    text-align: justify;
+    margin-bottom: 16px;
+    font-size: 1em;
+  }
+
+  p:first-child {
+    margin-top: 32px;
+    font-weight: bold;
+    font-size: 1.3em;
+  }
 `;
 
 const OldPrice = styled.span`

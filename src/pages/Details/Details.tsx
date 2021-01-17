@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 
 import * as S from './styles';
-import { Navbar } from 'components';
+import { Footer, Navbar } from 'components';
 import { IProduct } from 'services/products/types';
 import { ProductServices } from 'services';
 
@@ -22,14 +22,12 @@ const Details = () => {
     let photosData: string[] = [];
     Array.from({ length: 3 }).forEach((_, i) => {
       const key = `image${i + 1}`;
-      console.log(`i = ${i}, value = ${data[key]}`);
       if (data[key]) {
         photosData.push(data[key]);
       }
     });
     setPhotos(photosData);
     setSelectedPhoto(photosData[0]);
-    console.log({ photosData });
   }, [id]);
 
   useEffect(() => {
@@ -86,7 +84,11 @@ const Details = () => {
             <S.Button>Comprar</S.Button>
           </S.ButtonsContainer>
         </S.DetailsContainer>
+        <S.Description>
+          {product?.description.split("\n").map((text,key) => <p key={key}>{text}</p>)}
+        </S.Description>
       </S.Content>
+      <Footer />
     </S.Container>
   );
 };
