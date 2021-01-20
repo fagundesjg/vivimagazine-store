@@ -6,11 +6,12 @@ import { ICard } from './types';
 
 const CardComponent = (props: ICard) => {
   const { product, onClick } = props;
-  const { category, image1, name, price, discount } = product;
+  const { category, subcategory, image1, name, price, discount } = product;
 
   return (
     <S.Container>
       <S.Brand>{category.name}</S.Brand>
+      <S.Brand>{subcategory.name}</S.Brand>
       <S.Preview src={image1} alt={`Product ${name}`} onClick={onClick} />
       <S.Name>{name}</S.Name>
       {discount && discount > 0 ? (

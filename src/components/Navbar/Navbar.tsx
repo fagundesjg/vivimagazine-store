@@ -1,29 +1,36 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { TiShoppingCart } from 'react-icons/ti';
-
-import { INavbar, IItem } from './types';
-import { Container, Logo, MenuContainer } from './styles';
-import { Select } from '..';
 import { useHistory } from 'react-router-dom';
 
-const options: IItem[] = [
-  {
-    path: '',
-    label: 'Natura',
-    items: [
-      { path: '', label: 'Perfumes' },
-      { path: '', label: 'Desodorantes' },
-      { path: '', label: 'Cremes' },
-    ],
-  },
-  { path: '', label: 'Avon', items: [] },
-  { path: '', label: 'Boticário', items: [] },
-  { path: '', label: 'Romanel', items: [] },
-  { path: '', label: 'Kit Presente', items: [] },
-];
+import { INavbar } from './types';
+import { Container, Logo, MenuContainer } from './styles';
+import { Select } from '..';
+import { CategoryServices, SubCategoryServices } from 'services';
+import { ICategory, ISubCategory } from 'services/products/types';
 
 const Navbar = (props: INavbar) => {
   const history = useHistory();
+  const [categories, setCategories] = useState<ICategory[]>([]);
+  const [subCategories, setSubCategories] = useState<ISubCategory[]>([]);
+
+  const fetchCategories = useCallback(async () => {
+    const data = await CategoryServices.index();
+    setCategories(data);
+  }, []);
+
+  const fetchSubCategories = useCallback(async () => {
+    const data = await SubCategoryServices.index();
+    setSubCategories(data);
+  }, []);
+
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
+
+  useEffect(() => {
+    fetchSubCategories();
+  }, [fetchSubCategories]);
+
   return (
     <Container>
       <div>
@@ -35,8 +42,14 @@ const Navbar = (props: INavbar) => {
         </MenuContainer>
       </div>
       <div>
-        {options.map((option: IItem, i: number) => (
-          <Select key={i} label={option.label} options={option.items} />
+        {categories.map((category: ICategory, i: number) => (
+          <Select
+            key={i}
+            label={category.name}
+            options={subCategories
+              .filter((s) => s.category === category.id)
+              .map((s) => ({ label: s.name, path: '/#' }))}
+          />
         ))}
       </div>
     </Container>

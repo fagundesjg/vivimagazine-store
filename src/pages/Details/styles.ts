@@ -4,14 +4,15 @@ const Container = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  `;
-  
-  const Content = styled.div`
+`;
+
+const Content = styled.div`
   margin: 30px 0;
   display: flex;
   flex-wrap: wrap;
   padding: 100px 5vw 0 5vw;
   justify-content: center;
+  flex: 1;
 `;
 
 const PhotosContainer = styled.div`
@@ -22,6 +23,7 @@ const PhotosContainer = styled.div`
   flex: 1;
   justify-content: center;
   justify-content: space-between;
+  margin: 0 32px 0 0;
 `;
 
 const DetailsContainer = styled.div`
@@ -71,6 +73,7 @@ const Description = styled.div`
   display: flex;
   width: 100vw;
   flex-direction: column;
+
   p {
     text-align: justify;
     margin-bottom: 16px;

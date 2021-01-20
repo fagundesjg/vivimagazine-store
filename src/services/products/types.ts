@@ -10,10 +10,19 @@ export interface ICategory {
   updated_at: string;
 }
 
+export interface ISubCategory {
+  id: string;
+  name: string;
+  category: string;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface IProduct {
   [key: string]: any;
   id: string;
   category: ICategory;
+  subcategory: ISubCategory;
   description: string;
   gender: GenderEnum;
   quant: number;

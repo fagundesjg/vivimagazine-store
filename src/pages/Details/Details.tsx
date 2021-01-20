@@ -57,6 +57,7 @@ const Details = () => {
         <S.DetailsContainer>
           <S.InfosContainer>
             <S.Brand>{product?.category.name}</S.Brand>
+            <S.Brand>{product?.subcategory.name}</S.Brand>
             <S.Title>{product?.name}</S.Title>
             {product && product.discount && product.discount > 0 ? (
               <>
@@ -85,7 +86,9 @@ const Details = () => {
           </S.ButtonsContainer>
         </S.DetailsContainer>
         <S.Description>
-          {product?.description.split("\n").map((text,key) => <p key={key}>{text}</p>)}
+          {product?.description.split('\n').map((text, key) => (
+            <p key={key}>{text}</p>
+          ))}
         </S.Description>
       </S.Content>
       <Footer />

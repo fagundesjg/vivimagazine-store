@@ -29,8 +29,8 @@ const Brand = styled.span`
 `;
 
 const Preview = styled.img`
-  width: 150px;
-  height: auto;
+  width: auto;
+  height: 100px;
   margin-top: 10px;
   align-self: center;
   border-bottom: 0.3px solid #eee;
