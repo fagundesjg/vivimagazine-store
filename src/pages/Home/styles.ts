@@ -28,7 +28,7 @@ const ProductsContainer = styled.div`
 
 const SeeMore = styled.button`
   cursor: pointer;
-  margin: 15px 0;
+  margin: 15px 8px;
   height: 50px;
   width: 150px;
   border: none;
@@ -43,6 +43,18 @@ const SeeMore = styled.button`
   }
   &:focus {
     outline: none;
+  }
+
+  &:disabled {
+    background-color: #efefef;
+    color: #ccc;
+    border: 1px solid #efefef;
+    cursor: default;
+    &:hover {
+      color: #ccc;
+      background-color: #efefef;
+      border: 1px solid #efefef;
+    }
   }
 `;
 
